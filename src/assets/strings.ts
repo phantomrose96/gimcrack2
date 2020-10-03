@@ -1,4 +1,4 @@
-import * as callbacks from '../functions';
+import * as callbacks from '../functions/index';
 import { FunctionMapping } from '../interfaces/FunctionMap';
 
 export const rootsite = 'https://archiveofourown.org/works/8472670';
