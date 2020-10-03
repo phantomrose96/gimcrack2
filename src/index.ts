@@ -1,6 +1,6 @@
 import Discord from 'discord.js';
+import { functionMap } from './assets/strings';
 import { TOKEN } from './assets/token';
-import * as callbacks from './functions';
 
 const client = new Discord.Client();
 
@@ -17,5 +17,9 @@ client.on('ready', () => {
 });
 
 client.on('message', (message) => {
-  callbacks.onMessage(message);
+  functionMap.forEach((entry) => {
+    if (message.content.includes(entry.command)) {
+      entry.callback(message);
+    }
+  });
 });

@@ -4,16 +4,6 @@ import fetch from 'node-fetch';
 import * as responses from './assets/responses';
 import { rootsite } from './assets/strings';
 
-export function onMessage(message: Discord.Message) {
-  if (message.content.includes('!chapter')) {
-    onFetch(message);
-  }
-
-  if (message.content.includes('!ask')) {
-    onAsk(message);
-  }
-}
-
 export function onFetch(message: Discord.Message) {
   const chaptNum = message.content.match(/\d+/);
   if (!chaptNum) {
