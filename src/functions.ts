@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 import * as responses from './assets/responses';
 import { rootsite } from './assets/strings';
 
-export function onFetch(message: Discord.Message) {
+export function onFetchChapter(message: Discord.Message) {
   const chaptNum = message.content.match(/\d+/);
   if (!chaptNum) {
     message.channel.send(
@@ -12,7 +12,7 @@ export function onFetch(message: Discord.Message) {
     );
     return;
   }
-  fetchChapterLink(chaptNum[0])
+  fetchChapterLinkFromChapter(chaptNum[0])
     .then((result) => {
       if (result !== '') {
         message.channel.send('Sure thing, bucko: ' + result);
@@ -25,6 +25,29 @@ export function onFetch(message: Discord.Message) {
     .catch((err) => console.log(err));
 }
 
+export async function onFetchQuote(message: Discord.Message) {
+  message.content = message.content.toLocaleLowerCase();
+  const $ = await fetchPageContents(true);
+  console.log(message);
+
+  const div = $('p').filter((_ind, element) => {
+    const children = element.childNodes.filter((child) => {
+      let lowerCase = child.data?.toLocaleLowerCase();
+      lowerCase = lowerCase?.replace(/’/g, "'");
+      return lowerCase?.includes(message.content);
+    });
+    return children.length;
+  });
+
+  if (!!div && !!div[0]) {
+    message.channel.send(
+      'Here ya go:```' + joinParagraph(div[0].children) + '```',
+    );
+  } else {
+    message.channel.send("Sorry, can't find that quote");
+  }
+}
+
 export function onAsk(message: Discord.Message) {
   const index = Math.floor(
     Math.random() * responses.eightBall.length,
@@ -32,12 +55,19 @@ export function onAsk(message: Discord.Message) {
   message.channel.send(responses.eightBall[index]);
 }
 
-export async function fetchChapterLink(chapter: string) {
-  const response = await fetch(rootsite);
-  const HTMLText = await response.text();
+function joinParagraph(children: cheerio.Element[]): string {
+  let st = '';
+  children.forEach((child) => {
+    st += child.data ? child.data : child.firstChild.data;
+  });
+
+  return st;
+}
+
+async function fetchChapterLinkFromChapter(chapter: string) {
+  const $ = await fetchPageContents(true);
 
   return new Promise((resolve) => {
-    const $ = cheerio.load(HTMLText);
     const category = $('option').filter(
       (_ind, element) =>
         element.firstChild &&
@@ -47,6 +77,19 @@ export async function fetchChapterLink(chapter: string) {
     if (!chapSuffix) {
       resolve('');
     }
-    resolve(rootsite + 'chapters/' + chapSuffix);
+    resolve(rootsite + '/chapters/' + chapSuffix);
+  });
+}
+
+async function fetchPageContents(
+  fullwork?: boolean,
+): Promise<cheerio.Root> {
+  const URL: string =
+    rootsite + (fullwork ? '?view_full_work=true/' : '/');
+  const response = await fetch(URL);
+  const HTMLText = await response.text();
+
+  return new Promise((resolve) => {
+    resolve(cheerio.load(HTMLText));
   });
 }
