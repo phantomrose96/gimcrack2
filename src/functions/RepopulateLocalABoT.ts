@@ -12,9 +12,13 @@ export async function repopulateLocalABoT() {
 
   const chapters = await crawlChapters($);
   const stringify = JSON.stringify(chapters);
-  fs.writeFile('./ABoT.json', stringify, (err) => {
-    console.log(err);
-  });
+  fs.writeFile(
+    __dirname + '../../../dist/ABoTjson.txt',
+    stringify,
+    (err) => {
+      console.log(err);
+    },
+  );
 }
 
 async function crawlChapters($: cheerio.Root): Promise<Chapter[]> {
@@ -27,9 +31,6 @@ async function populateChapterContent(
   $: cheerio.Root,
   chapterNumber: number,
 ): Promise<Chapter[]> {
-  if (chapterNumber > 3) {
-    return Promise.resolve(chapters);
-  }
   const hyperlink = fetchChapterLinkFromChapter($, chapterNumber);
   if (hyperlink === '') {
     return Promise.resolve(chapters);
@@ -51,6 +52,8 @@ async function populateChapterContent(
     reviews: [],
   };
 
+  setTimeout(() => {}, 500);
+
   const cumulativeChapters = await populateChapterContent(
     chapters.concat(newChapter),
     $,
@@ -71,14 +74,23 @@ function processChapterContent(
     if (!divContent) {
       return;
     }
-    divContent.forEach((element) => {
-      paragraphText += element.data
-        ? element.data
-        : element.firstChild.data;
-    });
+    paragraphText += iterateOverChildren(divContent);
     chapterContents = chapterContents.concat(paragraphText);
   });
   return chapterContents;
+}
+
+function iterateOverChildren(elements: cheerio.Element[]): string {
+  let newText = '';
+  elements.forEach((element) => {
+    if (element.data) {
+      newText += element.data;
+    }
+    if (element.childNodes) {
+      newText += iterateOverChildren(element.childNodes);
+    }
+  });
+  return newText;
 }
 
 function fetchChapterLinkFromChapter(

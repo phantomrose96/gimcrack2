@@ -1,8 +1,8 @@
 import fs from 'fs';
-import { Chapter, Story } from '../interfaces/Story';
+import { Chapter } from '../interfaces/Story';
 
 const file = fs.readFileSync(
-  __dirname + '/../../dist/ABoT.txt',
+  __dirname + '/../../dist/ABoTjson.txt',
   'utf8',
 );
 const story = JSON.parse(file);
