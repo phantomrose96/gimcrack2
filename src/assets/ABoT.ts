@@ -1,5 +1,10 @@
 import fs from 'fs';
-import { Story } from '../interfaces/Story';
+import { Chapter, Story } from '../interfaces/Story';
 
-const file = fs.readFileSync('./Story.json', 'utf8');
-export const ABoT: Story = JSON.parse(file);
+const file = fs.readFileSync(
+  __dirname + '/../../dist/ABoT.txt',
+  'utf8',
+);
+const story = JSON.parse(file);
+
+export const ABoT: Chapter[] = story;

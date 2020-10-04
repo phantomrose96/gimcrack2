@@ -1,4 +1,4 @@
-import * as callbacks from '../functions/index';
+import * as callbacks from '../functions/callbacks/index';
 import * as responses from './responses';
 import { FunctionMapping } from '../interfaces/FunctionMap';
 

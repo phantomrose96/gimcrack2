@@ -4,7 +4,7 @@ export interface Story {
 }
 
 export interface Chapter {
-  content: string;
+  content: string[];
   hyperlink: string;
   date: Date | null;
   authorNotes: string;

@@ -60,20 +60,25 @@ async function populateChapterContent(
   return Promise.resolve(cumulativeChapters);
 }
 
-function processChapterContent(contents: cheerio.Element[]): string {
-  let text = '';
+function processChapterContent(
+  contents: cheerio.Element[],
+): string[] {
+  let chapterContents: string[] = [];
   contents.forEach((element) => {
+    let paragraphText = '';
     const divContent =
       element.name === 'p' ? element.children : undefined;
     if (!divContent) {
       return;
     }
     divContent.forEach((element) => {
-      text += element.data ? element.data : element.firstChild.data;
+      paragraphText += element.data
+        ? element.data
+        : element.firstChild.data;
     });
-    text += '\n\n';
+    chapterContents = chapterContents.concat(paragraphText);
   });
-  return text;
+  return chapterContents;
 }
 
 function fetchChapterLinkFromChapter(
@@ -92,4 +97,4 @@ function fetchChapterLinkFromChapter(
   return rootsite + '/chapters/' + chapSuffix;
 }
 
-// repopulateLocalABoT();
+repopulateLocalABoT();

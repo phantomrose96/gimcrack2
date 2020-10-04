@@ -1,6 +1,6 @@
 import Discord from 'discord.js';
-import { rootsite } from '../assets/Mappings';
-import { fetchPageContents } from './HelperFunctions';
+import { rootsite } from '../../assets/Mappings';
+import { fetchPageContents } from '../HelperFunctions';
 
 export function onFetchChapter(
   message: Discord.Message,
