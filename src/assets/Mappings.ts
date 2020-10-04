@@ -1,5 +1,5 @@
 import * as callbacks from '../functions/index';
-import * as responses from '../assets/responses';
+import * as responses from './responses';
 import { FunctionMapping } from '../interfaces/FunctionMap';
 
 export const rootsite = 'https://archiveofourown.org/works/8472670';

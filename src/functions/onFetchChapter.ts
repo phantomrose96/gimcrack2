@@ -1,5 +1,5 @@
 import Discord from 'discord.js';
-import { rootsite } from '../assets/Strings';
+import { rootsite } from '../assets/Mappings';
 import { fetchPageContents } from './HelperFunctions';
 
 export function onFetchChapter(

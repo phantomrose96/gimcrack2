@@ -1,7 +1,7 @@
 import Discord from 'discord.js';
 import { generateResponse } from './assets/responses';
-import { functionMap } from './assets/Strings';
-import { TOKEN } from './assets/Token';
+import { functionMap } from './assets/Mappings';
+import { TOKEN } from './assets/Token'; // ignored from git repo
 
 const client = new Discord.Client();
 
