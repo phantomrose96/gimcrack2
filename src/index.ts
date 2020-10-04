@@ -1,6 +1,7 @@
 import Discord from 'discord.js';
-import { functionMap } from './assets/strings';
-import { TOKEN } from './assets/token';
+import { generateResponse } from './assets/responses';
+import { functionMap } from './assets/Strings';
+import { TOKEN } from './assets/Token';
 
 const client = new Discord.Client();
 
@@ -22,7 +23,7 @@ client.on('message', (message) => {
       message.content = message.content.substr(
         entry.command.length + 1,
       );
-      entry.callback(message);
+      entry.callback(message, generateResponse(entry.responses));
     }
   });
 });

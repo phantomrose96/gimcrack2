@@ -1,7 +1,10 @@
 import { fetchPageContents } from './HelperFunctions';
 import Discord from 'discord.js';
 
-export async function onFetchQuote(message: Discord.Message) {
+export async function onFetchQuote(
+  message: Discord.Message,
+  response: string,
+) {
   message.content = message.content.toLocaleLowerCase();
   const $ = await fetchPageContents(true);
   const div = $('p').filter(
@@ -17,7 +20,7 @@ export async function onFetchQuote(message: Discord.Message) {
 
   if (!!div && !!div[0]) {
     message.channel.send(
-      'Here ya go:```' + joinParagraph(div[0].children) + '```',
+      response + '```' + joinParagraph(div[0].children) + '```',
     );
   } else {
     message.channel.send("Sorry, can't find that quote");

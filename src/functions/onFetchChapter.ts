@@ -2,7 +2,10 @@ import Discord from 'discord.js';
 import { rootsite } from '../assets/Strings';
 import { fetchPageContents } from './HelperFunctions';
 
-export function onFetchChapter(message: Discord.Message) {
+export function onFetchChapter(
+  message: Discord.Message,
+  response: string,
+) {
   const chaptNum = message.content.match(/\d+/);
   if (!chaptNum) {
     message.channel.send(
@@ -13,7 +16,7 @@ export function onFetchChapter(message: Discord.Message) {
   fetchChapterLinkFromChapter(chaptNum[0])
     .then((result) => {
       if (result !== '') {
-        message.channel.send('Sure thing, bucko: ' + result);
+        message.channel.send(response + '\n' + result);
       } else {
         message.channel.send(
           'Hey what do I look like, a fortune teller?',

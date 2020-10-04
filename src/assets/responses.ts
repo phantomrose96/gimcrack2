@@ -1,4 +1,4 @@
-export const eightBall: string[] = [
+export const onAskResponses: string[] = [
   'sounds like something that might happen',
   'you kiddin? not in a million years!',
   'yikes, try asking someone else maybe',
@@ -16,3 +16,24 @@ export const eightBall: string[] = [
   'naaaah',
   "you're asking the wrong spirit",
 ];
+
+export const onFetchQuoteResponses: string[] = [
+  'Here ya go:',
+  'Finding this one was tricky! Maybe tip a little more?',
+  'Abra cadabra',
+];
+
+export const onFetchChapterResponses: string[] = [
+  'Sure thing bucko',
+  'Coming right up',
+  "I wonder if I'm in this chapter",
+  "Careful! It's hot.",
+];
+
+export function generateResponse(responses: string[]): string {
+  if (responses.length === 0) {
+    return '';
+  }
+  const index = Math.floor(Math.random() * responses.length);
+  return responses[index];
+}
