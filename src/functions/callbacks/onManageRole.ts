@@ -34,7 +34,7 @@ async function onManageRole(
 
   // how to XOR in MS Paint?
   if (!(roleAction ^ hasRole(message, role))) {
-    message.channel.send("You're asking for what you've already got");
+    message.channel.send("That won't change anything");
     return;
   }
 

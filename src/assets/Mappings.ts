@@ -30,4 +30,9 @@ export const functionMap: FunctionMapping[] = [
     responses: responses.onRemoveRoleResponses,
     callback: callbacks.onRemoveRole,
   },
+  {
+    commands: ['!spin', 'gamble'],
+    responses: responses.onSpinResponses,
+    callback: callbacks.onSpin,
+  },
 ];
