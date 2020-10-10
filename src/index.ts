@@ -19,11 +19,11 @@ client.on('ready', () => {
 
 client.on('message', (message) => {
   functionMap.forEach((entry) => {
-    if (message.content.startsWith(entry.command)) {
-      message.content = message.content.substr(
-        entry.command.length + 1,
-      );
-      entry.callback(message, generateResponse(entry.responses));
-    }
+    entry.commands.forEach((command) => {
+      if (message.content.startsWith(command)) {
+        message.content = message.content.substr(command.length + 1);
+        entry.callback(message, generateResponse(entry.responses));
+      }
+    });
   });
 });
