@@ -26,6 +26,7 @@ export const onFetchQuoteResponses: string[] = [
 export const onSpinResponses: string[] = [
   'Well would you look at that? ',
   'Results! ',
+  'Winner winner! ',
 ];
 
 export const onAssignRoleResponses: string[] = [

@@ -10,7 +10,16 @@ export function onSpin(message: Discord.Message, response: string) {
 
   message.channel.send(makeMessage(spin));
   const wins = numberOfWins(spin);
-  message.channel.send(response + ' ' + wins);
+  if (wins === 0) {
+    message.channel.send('Nothing! Sorry dude, tough break.');
+    return;
+  }
+  message.channel.send(
+    response +
+      ' Heres your winnings: ' +
+      wins +
+      "x :sparkles: (Don't tell Ritsu)",
+  );
 }
 
 function makeMessage(spin: number[]): string {
