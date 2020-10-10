@@ -23,6 +23,16 @@ export const onFetchQuoteResponses: string[] = [
   'Abra cadabra',
 ];
 
+export const onAssignRoleResponses: string[] = [
+  'Here ya go: ',
+  'Bam, done: ',
+];
+
+export const onRemoveRoleResponses: string[] = [
+  'Cleared that out for ya. No more ',
+  'Say goodbye to role ',
+];
+
 export const onFetchChapterResponses: string[] = [
   'Sure thing bucko',
   'Coming right up',

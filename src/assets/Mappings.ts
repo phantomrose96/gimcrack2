@@ -20,4 +20,14 @@ export const functionMap: FunctionMapping[] = [
     responses: responses.onFetchQuoteResponses,
     callback: callbacks.onFetchQuote,
   },
+  {
+    command: '!assign role',
+    responses: responses.onAssignRoleResponses,
+    callback: callbacks.onAssignRole,
+  },
+  {
+    command: '!remove role',
+    responses: responses.onRemoveRoleResponses,
+    callback: callbacks.onRemoveRole,
+  },
 ];

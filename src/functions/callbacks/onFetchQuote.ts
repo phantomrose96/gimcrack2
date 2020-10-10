@@ -1,7 +1,7 @@
 import Discord from 'discord.js';
 import { ABoT } from '../../assets/ABoT';
 
-export async function onFetchQuote(
+export function onFetchQuote(
   message: Discord.Message,
   response: string,
 ) {

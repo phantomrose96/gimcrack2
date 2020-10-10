@@ -52,7 +52,7 @@ async function populateChapterContent(
     reviews: [],
   };
 
-  setTimeout(() => {}, 500);
+  setTimeout(() => {}, 500); // dont want AO3 to ding me for spammy bot activity :<
 
   const cumulativeChapters = await populateChapterContent(
     chapters.concat(newChapter),
