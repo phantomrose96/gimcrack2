@@ -19,7 +19,7 @@ export const onAskResponses: string[] = [
 
 export const onFetchQuoteResponses: string[] = [
   'Here ya go:',
-  'Finding this one was tricky! Maybe tip a little more?',
+  'Finding this one was tricky! Maybe tip a little more next time?',
   'Abra cadabra',
 ];
 

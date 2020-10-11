@@ -1,5 +1,5 @@
 import Discord from 'discord.js';
-import { ABoT } from '../../assets/ABoT';
+import { ABoT } from '../../strings/ABoT';
 
 export function onFetchQuote(
   message: Discord.Message,

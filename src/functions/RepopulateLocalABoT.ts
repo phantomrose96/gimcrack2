@@ -1,4 +1,4 @@
-import { rootsite } from '../assets/Mappings';
+import { rootsite } from '../strings/Mappings';
 import cheerio from 'cheerio';
 import fetch from 'node-fetch';
 import fs from 'fs';

@@ -1,5 +1,5 @@
 import Discord from 'discord.js';
-import { WheelIcons } from '../../assets/WheelIcons';
+import { WheelIcons } from '../../strings/WheelIcons';
 import {
   generateSpin,
   numberOfWins,
@@ -15,10 +15,7 @@ export function onSpin(message: Discord.Message, response: string) {
     return;
   }
   message.channel.send(
-    response +
-      ' Heres your winnings: ' +
-      wins +
-      "x :sparkles: (Don't tell Ritsu)",
+    response + ' Heres your winnings: ' + wins + 'x :sparkles:',
   );
 }
 

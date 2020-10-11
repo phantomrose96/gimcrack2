@@ -1,4 +1,4 @@
-import { WheelIcons } from '../../assets/WheelIcons';
+import { WheelIcons } from '../../strings/WheelIcons';
 
 export function numberOfWins(arr: number[]): number {
   if (arr.length != 9) {
