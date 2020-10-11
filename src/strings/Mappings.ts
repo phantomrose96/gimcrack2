@@ -35,4 +35,9 @@ export const functionMap: FunctionMapping[] = [
     responses: responses.onSpinResponses,
     callback: callbacks.onSpin,
   },
+  {
+    commands: ['!balance'],
+    responses: responses.onBalanceResponses,
+    callback: callbacks.onBalance,
+  },
 ];

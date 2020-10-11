@@ -23,6 +23,12 @@ export const onFetchQuoteResponses: string[] = [
   'Abra cadabra',
 ];
 
+export const onBalanceResponses: string[] = [
+  'Cha-ching!',
+  'Here',
+  'Ritsu would be jealous',
+];
+
 export const onSpinResponses: string[] = [
   'Well would you look at that? ',
   'Results! ',

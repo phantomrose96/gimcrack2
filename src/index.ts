@@ -2,11 +2,11 @@ import Discord from 'discord.js';
 import { generateResponse } from './strings/responses';
 import { functionMap } from './strings/Mappings';
 import { TOKEN } from './strings/Token'; // ignored from git repo
+import { initORM } from './database/Database';
 
 const client = new Discord.Client();
-
 if (TOKEN) {
-  client.login(TOKEN).catch(console.error);
+  client.login(TOKEN).catch((err) => console.error(err));
 }
 
 client.on('ready', () => {
@@ -14,6 +14,7 @@ client.on('ready', () => {
     console.error('Failed to log in.');
     return;
   }
+  initORM();
   console.log('logged in as ' + client.user.tag);
 });
 

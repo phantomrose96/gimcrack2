@@ -17,6 +17,13 @@
       "name": "Repop",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}\\lib\\functions\\RepopulateLocalABoT.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "DB",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}\\lib\\database\\Database.js"
     }
   ]
 }
