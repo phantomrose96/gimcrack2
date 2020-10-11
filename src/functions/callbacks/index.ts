@@ -4,3 +4,4 @@ export * from './onAsk';
 export * from './onManageRole';
 export * from './onSpin';
 export * from './onBalance';
+export * from './onDailies';

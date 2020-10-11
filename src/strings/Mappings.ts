@@ -40,4 +40,9 @@ export const functionMap: FunctionMapping[] = [
     responses: responses.onBalanceResponses,
     callback: callbacks.onBalance,
   },
+  {
+    commands: ['!dailies'],
+    responses: responses.onDailiesResponses,
+    callback: callbacks.onDailies,
+  },
 ];

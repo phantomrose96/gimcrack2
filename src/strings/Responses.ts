@@ -29,6 +29,10 @@ export const onBalanceResponses: string[] = [
   'Ritsu would be jealous',
 ];
 
+export const onDailiesResponses: string[] = [
+  "Skimmed these off Ritsu. Don't tell him.",
+];
+
 export const onSpinResponses: string[] = [
   'Well would you look at that? ',
   'Results! ',

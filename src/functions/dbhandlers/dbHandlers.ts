@@ -1,11 +1,14 @@
+import { MillInADay } from '../../strings/MillInADay';
 import { getORM, ORM } from '../../database/Database';
 import { Record } from '../../database/Record';
 
 export async function createEntry(userid: string): Promise<void> {
   const orm = await getORM();
+
   const newEntry = orm.em.create(Record, {
     userID: userid,
     balance: 10,
+    timestamp: new Date(),
   });
 
   const result = await orm.em.persistAndFlush(newEntry);
@@ -24,7 +27,7 @@ export async function updateBalance(
 
   await orm.em.persistAndFlush(foundEntry);
 
-  return Promise.resolve(delta);
+  return Promise.resolve(getBalance(userid));
 }
 
 export async function getBalance(userid: string): Promise<number> {
@@ -40,10 +43,11 @@ export async function updateDailies(userid: string): Promise<number> {
 
   const nowTime = new Date();
   const diff = nowTime.getTime() - foundEntry.timestamp.getTime();
-  if (diff > 86400 * 1000) {
+  if (diff > MillInADay) {
     return Promise.resolve(updateBalance(userid, 50));
   } else {
-    return Promise.resolve(-1);
+    const cooldownHours = (MillInADay - diff) / 1000 / 3600;
+    return Promise.resolve(-cooldownHours);
   }
 }
 

@@ -17,8 +17,10 @@ export async function onSpin(
   if (!checkAccount) {
     return;
   }
-  await updateBalance(message.author.id, -1);
-  message.channel.send('Thanks, I]ll be taking that: :sparkle: x1');
+  let balance = await updateBalance(message.author.id, -1);
+  message.channel.send(
+    `Thanks, I'll be taking that: :sparkles: x1\n Current balance: x${balance} :sparkles:\n`,
+  );
 
   const spin = generateSpin();
   message.channel.send(makeMessage(spin));
@@ -27,10 +29,11 @@ export async function onSpin(
     message.channel.send('Nothing! Sorry dude, tough break.');
     return;
   }
+  balance = await updateBalance(message.author.id, wins);
+
   message.channel.send(
-    response + ' Heres your winnings: ' + wins + 'x :sparkles:',
+    `${response} Heres your winnings: ${wins}x :sparkles:\n Current Balance: ${balance}x :sparkles:`,
   );
-  await updateBalance(message.author.id, wins);
 }
 
 function makeMessage(spin: number[]): string {

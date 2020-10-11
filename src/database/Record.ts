@@ -8,7 +8,7 @@ export class Record {
   @Property({ default: 0 })
   balance: number;
 
-  @Property({ type: 'date', default: 'new Date()' })
+  @Property({ type: 'date', default: 'new Date()', nullable: true })
   timestamp: Date;
 
   @Property({ type: 'date', nullable: true })

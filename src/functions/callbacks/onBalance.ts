@@ -13,5 +13,5 @@ export async function onBalance(
     return;
   }
   const balance = await getBalance(message.author.id);
-  message.channel.send(response + ': x' + balance + ' :sparkle:');
+  message.channel.send(response + ': x' + balance + ' :sparkles:');
 }
