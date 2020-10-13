@@ -4,8 +4,10 @@
   "description": "gimcrack bot!",
   "main": "index.js",
   "scripts": {
+    "watch": "tsc -w",
     "start": "nodemon lib/index.js",
-    "watch": "tsc -w"
+    "buildProd": "tsc",
+    "startProd": "node lib/index.js"
   },
   "author": "Chrissy",
   "license": "ISC",
