@@ -30,6 +30,20 @@ export async function updateBalance(
   return Promise.resolve(getBalance(userid));
 }
 
+async function updateTimeStamp(
+  userid: string,
+  newTimeStamp: Date,
+): Promise<number> {
+  const orm = await getORM();
+  const foundEntry = await fetchEntry(userid, orm);
+
+  foundEntry.timestamp = newTimeStamp;
+
+  await orm.em.persistAndFlush(foundEntry);
+
+  return Promise.resolve(getBalance(userid));
+}
+
 export async function getBalance(userid: string): Promise<number> {
   const orm = await getORM();
   const foundEntry = await fetchEntry(userid, orm);
@@ -44,6 +58,7 @@ export async function updateDailies(userid: string): Promise<number> {
   const nowTime = new Date();
   const diff = nowTime.getTime() - foundEntry.timestamp.getTime();
   if (diff > MillInADay) {
+    await updateTimeStamp(userid, nowTime);
     return Promise.resolve(updateBalance(userid, 50));
   } else {
     const cooldownHours = (MillInADay - diff) / 1000 / 3600;
