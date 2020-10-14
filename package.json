@@ -7,7 +7,8 @@
     "watch": "tsc -w",
     "start": "nodemon lib/index.js",
     "buildProd": "tsc",
-    "startProd": "node lib/index.js"
+	"startProd": "node lib/index.js",
+	"repopABoT": "node lib/repopABoT.js"
   },
   "author": "Chrissy",
   "license": "ISC",
