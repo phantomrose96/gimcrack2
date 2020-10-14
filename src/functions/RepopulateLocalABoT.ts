@@ -13,7 +13,7 @@ export async function repopulateLocalABoT() {
   const chapters = await crawlChapters($);
   const stringify = JSON.stringify(chapters);
   fs.writeFile(
-    __dirname + '../../../dist/ABoTjson.txt',
+    __dirname + '/../../../dist/ABoTjson.txt',
     stringify,
     (err) => {
       console.log(err);
