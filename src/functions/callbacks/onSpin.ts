@@ -41,12 +41,13 @@ export async function onSpin(
   message.channel.send(makeMessage(spin));
   const wins = numberOfWins(spin) * betMultiplier;
   const netChange = wins - bet;
+  const balance = await updateBalance(account, netChange);
+
   if (wins === 0) {
     message.channel.send('Nothing! Sorry dude, tough break.');
     return;
   }
 
-  const balance = await updateBalance(account, netChange);
   message.channel.send(
     `${response} Heres your winnings: ${wins}x :sparkles:\n Current Balance: ${balance}x :sparkles:`,
   );
