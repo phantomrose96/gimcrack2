@@ -2,6 +2,7 @@ import Discord from 'discord.js';
 import { WheelIcons } from '../../strings/WheelIcons';
 import {
   checkAndCreateAccount,
+	getBalance,
   updateBalance,
 } from '../dbhandlers/dbHandlers';
 import {
@@ -13,18 +14,30 @@ export async function onSpin(
   message: Discord.Message,
   response: string,
 ) {
+  const findMultiplier = message.content.match(/\d+/);
+  const multiplier = findMultiplier ? (findMultiplier[0] as unknown) as number: 1;
+
   const checkAccount = await checkAndCreateAccount(message.author.id);
   if (!checkAccount) {
     return;
   }
-  let balance = await updateBalance(message.author.id, -1);
+
+  const currentBalance = await getBalance(message.author.id);
+  if(currentBalance < multiplier) {
+	message.channel.send(
+		`Woah there! That's way too steep a bet. You can't gamble away more than your life force.`,
+	  );
+	return;
+  }
+
+  let balance = await updateBalance(message.author.id, -multiplier);
   message.channel.send(
-    `Thanks, I'll be taking that: :sparkles: x1\n Current balance: x${balance} :sparkles:\n`,
+    `Thanks, I'll be taking that: -${multiplier} :sparkles: \nCurrent balance: x${balance} :sparkles:\n`,
   );
 
   const spin = generateSpin();
   message.channel.send(makeMessage(spin));
-  const wins = numberOfWins(spin);
+  const wins = numberOfWins(spin)*multiplier;
   if (wins === 0) {
     message.channel.send('Nothing! Sorry dude, tough break.');
     return;
@@ -37,13 +50,13 @@ export async function onSpin(
 }
 
 function makeMessage(spin: number[]): string {
-  let message = '';
+  let message = '>\n>';
 
   spin.forEach((val, ind) => {
     const icon = WheelIcons[val];
     message += ` ${icon}`;
     if (ind % 3 === 2) {
-      message += ' \n';
+      message += ' \n>';
     }
   });
 

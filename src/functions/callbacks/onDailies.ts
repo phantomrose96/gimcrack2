@@ -21,7 +21,7 @@ export async function onDailies(
     );
   } else {
     message.channel.send(
-      response + ': x' + dailiesResponse + ' :sparkles:',
+      response + ': x50\nCurrent Balance: ' + dailiesResponse + ' :sparkles:',
     );
   }
 }
