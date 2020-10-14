@@ -3,6 +3,7 @@ import cheerio from 'cheerio';
 import fetch from 'node-fetch';
 import fs from 'fs';
 import { Chapter } from 'src/interfaces/Story';
+import path from 'path';
 
 export async function repopulateLocalABoT() {
   const URL: string = rootsite + '/';
@@ -13,7 +14,7 @@ export async function repopulateLocalABoT() {
   const chapters = await crawlChapters($);
   const stringify = JSON.stringify(chapters);
   fs.writeFile(
-    __dirname + '/../../../dist/ABoTjson.txt',
+    path.join(__dirname, '/../../dist/ABoTjson.txt'),
     stringify,
     (err) => {
       console.log(err);
