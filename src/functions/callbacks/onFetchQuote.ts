@@ -1,5 +1,5 @@
 import Discord from 'discord.js';
-import { ABoT } from '../../strings/ABoT';
+import { ABoT } from '../../structs/ABoT';
 
 export function onFetchQuote(
   message: Discord.Message,
@@ -26,8 +26,8 @@ export function onFetchQuote(
 }
 
 function trimQuotes(content: string): string {
-	if(content.startsWith('"') && content.endsWith('"')) {
-		return content.substr(1, content.length - 2);
-	}
-	return content;
+  if (content.startsWith('"') && content.endsWith('"')) {
+    return content.substr(1, content.length - 2);
+  }
+  return content;
 }

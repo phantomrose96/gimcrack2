@@ -13,7 +13,7 @@ export const onAskResponses: string[] = [
   "I'd love to tell you, but I think Chrissy might exorcise me from the server",
   "wouldn't you like to know?",
   'with a ton of luck, maybe',
-  'naaaah', 
+  'naaaah',
   "you're asking the wrong spirit",
 ];
 
@@ -54,6 +54,11 @@ export const onFetchChapterResponses: string[] = [
   'Coming right up',
   "I wonder if I'm in this chapter",
   "Careful! It's hot.",
+];
+
+export const onHelpResponses: string[] = [
+  'Need some help?',
+  'I got you',
 ];
 
 export function generateResponse(responses: string[]): string {

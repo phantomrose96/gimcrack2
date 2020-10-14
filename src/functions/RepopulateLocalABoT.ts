@@ -1,4 +1,4 @@
-import { rootsite } from '../strings/Mappings';
+import { rootsite } from '../structs/Mappings';
 import cheerio from 'cheerio';
 import fetch from 'node-fetch';
 import fs from 'fs';

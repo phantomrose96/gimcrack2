@@ -1,5 +1,5 @@
 import Discord from 'discord.js';
-import { ABoT } from '../../strings/ABoT';
+import { ABoT } from '../../structs/ABoT';
 
 export function onFetchChapter(
   message: Discord.Message,

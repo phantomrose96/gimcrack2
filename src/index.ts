@@ -1,6 +1,6 @@
 import Discord from 'discord.js';
 import { generateResponse } from './strings/Responses';
-import { functionMap } from './strings/Mappings';
+import { functionMap } from './structs/Mappings';
 import { TOKEN } from './strings/Token'; // ignored from git repo
 import { initORM } from './database/Database';
 
