@@ -13,7 +13,7 @@ export const onAskResponses: string[] = [
   "I'd love to tell you, but I think Chrissy might exorcise me from the server",
   "wouldn't you like to know?",
   'with a ton of luck, maybe',
-  'naaaah',
+  'naaaah', 
   "you're asking the wrong spirit",
 ];
 
