@@ -8,7 +8,8 @@
     "start": "nodemon lib/index.js",
     "buildProd": "tsc",
 	"startProd": "node lib/index.js",
-	"repopABoT": "node lib/repopABoT.js"
+	"repopABoT": "node lib/repopABoT.js",
+	"spinChances": "node lib/spinChances.js"
   },
   "author": "Chrissy",
   "license": "ISC",

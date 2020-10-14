@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "Launch Program",
       "skipFiles": ["<node_internals>/**"],
-	  "program": "${workspaceFolder}\\lib\\index.js"
+      "program": "${workspaceFolder}\\lib\\index.js"
     },
     {
       "type": "node",
@@ -24,6 +24,13 @@
       "name": "DB",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}\\lib\\database\\Database.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Spin Chances",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}\\lib\\spinChances.js"
     }
   ]
 }
