@@ -5,7 +5,7 @@ export function onFetchQuote(
   message: Discord.Message,
   response: string,
 ) {
-  message.content = message.content.toLocaleLowerCase();
+  message.content = trimQuotes(message.content.toLocaleLowerCase());
   let foundQuote: string | undefined;
 
   ABoT.find((chapter) => {
@@ -23,4 +23,11 @@ export function onFetchQuote(
   } else {
     message.channel.send("Sorry, can't find that quote");
   }
+}
+
+function trimQuotes(content: string): string {
+	if(content.startsWith('"') && content.endsWith('"')) {
+		return content.substr(1, content.length - 2);
+	}
+	return content;
 }

@@ -21,7 +21,7 @@ export const functionMap: FunctionMapping[] = [
     callback: callbacks.onFetchQuote,
   },
   {
-    commands: ['!assign role', '!add role', '!assign'],
+    commands: ['!role', '!assign role', '!add role', '!assign'],
     responses: responses.onAssignRoleResponses,
     callback: callbacks.onAssignRole,
   },
@@ -31,7 +31,7 @@ export const functionMap: FunctionMapping[] = [
     callback: callbacks.onRemoveRole,
   },
   {
-    commands: ['!spin', 'gamble'],
+    commands: ['!spin', '!gamble'],
     responses: responses.onSpinResponses,
     callback: callbacks.onSpin,
   },
