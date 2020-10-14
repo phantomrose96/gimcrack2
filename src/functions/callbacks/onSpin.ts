@@ -2,7 +2,7 @@ import Discord from 'discord.js';
 import { WheelIcons } from '../../strings/WheelIcons';
 import {
   checkAndCreateAccount,
-	getBalance,
+  getBalance,
   updateBalance,
 } from '../dbhandlers/dbHandlers';
 import {
@@ -14,36 +14,39 @@ export async function onSpin(
   message: Discord.Message,
   response: string,
 ) {
-  const findMultiplier = message.content.match(/\d+/);
-  const multiplier = findMultiplier ? (findMultiplier[0] as unknown) as number: 1;
+  const findBet = message.content.match(/\d+/);
+  const bet = findBet ? ((findBet[0] as unknown) as number) : 1;
+  const betMultiplier = bet * 2;
 
-  const checkAccount = await checkAndCreateAccount(message.author.id);
-  if (!checkAccount) {
+  const account = await checkAndCreateAccount(message.author.id);
+  if (!account) {
     return;
   }
 
-  const currentBalance = await getBalance(message.author.id);
-  if(currentBalance < multiplier) {
-	message.channel.send(
-		`Woah there! That's way too steep a bet. You can't gamble away more than your life force.`,
-	  );
-	return;
+  const currentBalance = await getBalance(account);
+  if (currentBalance < bet) {
+    message.channel.send(
+      `Woah there! That's way too steep a bet. You can't gamble away more than your life force.`,
+    );
+    return;
   }
 
-  let balance = await updateBalance(message.author.id, -multiplier);
   message.channel.send(
-    `Thanks, I'll be taking that: -${multiplier} :sparkles: \nCurrent balance: x${balance} :sparkles:\n`,
+    `Thanks, I'll be taking that: -${bet} :sparkles: \nCurrent balance: x${
+      currentBalance - bet
+    } :sparkles:\n`,
   );
 
   const spin = generateSpin();
   message.channel.send(makeMessage(spin));
-  const wins = numberOfWins(spin)*multiplier;
+  const wins = numberOfWins(spin) * betMultiplier;
+  const netChange = wins - bet;
   if (wins === 0) {
     message.channel.send('Nothing! Sorry dude, tough break.');
     return;
   }
-  balance = await updateBalance(message.author.id, wins);
 
+  const balance = await updateBalance(account, netChange);
   message.channel.send(
     `${response} Heres your winnings: ${wins}x :sparkles:\n Current Balance: ${balance}x :sparkles:`,
   );

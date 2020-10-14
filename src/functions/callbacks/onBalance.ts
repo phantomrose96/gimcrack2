@@ -8,10 +8,10 @@ export async function onBalance(
   message: Discord.Message,
   response: string,
 ) {
-  const checkAccount = await checkAndCreateAccount(message.author.id);
-  if (!checkAccount) {
+  const account = await checkAndCreateAccount(message.author.id);
+  if (!account) {
     return;
   }
-  const balance = await getBalance(message.author.id);
+  const balance = await getBalance(account);
   message.channel.send(response + ': x' + balance + ' :sparkles:');
 }

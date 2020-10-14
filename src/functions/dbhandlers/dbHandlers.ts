@@ -2,7 +2,7 @@ import { MillInADay } from '../../strings/MillInADay';
 import { getORM, ORM } from '../../database/Database';
 import { Record } from '../../database/Record';
 
-export async function createEntry(userid: string): Promise<void> {
+export async function createEntry(userid: string): Promise<Record> {
   const orm = await getORM();
 
   const newEntry = orm.em.create(Record, {
@@ -11,62 +11,15 @@ export async function createEntry(userid: string): Promise<void> {
     timestamp: new Date(),
   });
 
-  const result = await orm.em.persistAndFlush(newEntry);
+  await orm.em.persistAndFlush(newEntry);
 
-  return Promise.resolve(result);
+  return Promise.resolve(newEntry);
 }
 
-export async function updateBalance(
+async function fetchEntry(
   userid: string,
-  delta: number,
-): Promise<number> {
-  const orm = await getORM();
-  const foundEntry = await fetchEntry(userid, orm);
-
-  foundEntry.balance += delta;
-
-  await orm.em.persistAndFlush(foundEntry);
-
-  return Promise.resolve(getBalance(userid));
-}
-
-async function updateTimeStamp(
-  userid: string,
-  newTimeStamp: Date,
-): Promise<number> {
-  const orm = await getORM();
-  const foundEntry = await fetchEntry(userid, orm);
-
-  foundEntry.timestamp = newTimeStamp;
-
-  await orm.em.persistAndFlush(foundEntry);
-
-  return Promise.resolve(getBalance(userid));
-}
-
-export async function getBalance(userid: string): Promise<number> {
-  const orm = await getORM();
-  const foundEntry = await fetchEntry(userid, orm);
-
-  return Promise.resolve(foundEntry.balance);
-}
-
-export async function updateDailies(userid: string): Promise<number> {
-  const orm = await getORM();
-  const foundEntry = await fetchEntry(userid, orm);
-
-  const nowTime = new Date();
-  const diff = nowTime.getTime() - foundEntry.timestamp.getTime();
-  if (diff > MillInADay) {
-    await updateTimeStamp(userid, nowTime);
-    return Promise.resolve(updateBalance(userid, 50));
-  } else {
-    const cooldownHours = (MillInADay - diff) / 1000 / 3600;
-    return Promise.resolve(-cooldownHours);
-  }
-}
-
-async function fetchEntry(userid: string, orm: ORM): Promise<Record> {
+  orm: ORM,
+): Promise<Record | null> {
   const foundEntry = await orm.em.find(Record, {
     userID: userid,
   });
@@ -79,16 +32,55 @@ async function fetchEntry(userid: string, orm: ORM): Promise<Record> {
 
 export async function checkAndCreateAccount(
   userid: string,
-): Promise<boolean> {
+): Promise<Record> {
   const orm = await getORM();
-  const foundEntry = await orm.em.find(Record, {
-    userID: userid,
-  });
+  let foundEntry = await fetchEntry(userid, orm);
 
-  if (!foundEntry || foundEntry.length === 0) {
-    await createEntry(userid);
-    return Promise.resolve(true);
+  if (!foundEntry) {
+    foundEntry = await createEntry(userid);
   }
 
-  return Promise.resolve(true);
+  return Promise.resolve(foundEntry);
+}
+
+///
+
+export async function updateBalance(
+  record: Record,
+  delta: number,
+): Promise<number> {
+  const orm = await getORM();
+  record.balance += delta;
+
+  await orm.em.persistAndFlush(record);
+
+  return Promise.resolve(getBalance(record));
+}
+
+async function updateTimeStamp(
+  record: Record,
+  newTimeStamp: Date,
+): Promise<number> {
+  const orm = await getORM();
+
+  record.timestamp = newTimeStamp;
+
+  await orm.em.persistAndFlush(record);
+  return Promise.resolve(getBalance(record));
+}
+
+export async function getBalance(record: Record): Promise<number> {
+  return Promise.resolve(record.balance);
+}
+
+export async function updateDailies(record: Record): Promise<number> {
+  const nowTime = new Date();
+  const diff = nowTime.getTime() - record.timestamp.getTime();
+  if (diff > MillInADay) {
+    await updateTimeStamp(record, nowTime);
+    return Promise.resolve(updateBalance(record, 50));
+  } else {
+    const cooldownHours = (MillInADay - diff) / 1000 / 3600;
+    return Promise.resolve(-cooldownHours);
+  }
 }

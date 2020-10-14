@@ -8,11 +8,11 @@ export async function onDailies(
   message: Discord.Message,
   response: string,
 ) {
-  const checkAccount = await checkAndCreateAccount(message.author.id);
-  if (!checkAccount) {
+  const account = await checkAndCreateAccount(message.author.id);
+  if (!account) {
     return;
   }
-  const dailiesResponse = await updateDailies(message.author.id);
+  const dailiesResponse = await updateDailies(account);
   if (dailiesResponse < 0) {
     message.channel.send(
       `Sorry, you're on cooldown for another ${Math.floor(
@@ -21,7 +21,10 @@ export async function onDailies(
     );
   } else {
     message.channel.send(
-      response + ': x50\nCurrent Balance: ' + dailiesResponse + ' :sparkles:',
+      response +
+        ': x50\nCurrent Balance: ' +
+        dailiesResponse +
+        ' :sparkles:',
     );
   }
 }
