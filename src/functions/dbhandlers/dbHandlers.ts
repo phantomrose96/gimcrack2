@@ -8,7 +8,7 @@ export async function createEntry(userid: string): Promise<Record> {
   const newEntry = orm.em.create(Record, {
     userID: userid,
     balance: 10,
-    timestamp: new Date(),
+    timestamp: new Date(2015, 11, 5),
   });
 
   await orm.em
