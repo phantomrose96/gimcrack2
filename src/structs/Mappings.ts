@@ -34,7 +34,13 @@ export const functionMap: FunctionMapping[] = [
     },
   },
   {
-    commands: ['!role', '!assign role', '!add role', '!assign'],
+    commands: [
+      '!role',
+      '!assign role',
+      '!add role',
+      '!assign',
+      '!add',
+    ],
     responses: responses.onAssignRoleResponses,
     callback: callbacks.onAssignRole,
     description: {
