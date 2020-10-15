@@ -11,7 +11,15 @@ export async function createEntry(userid: string): Promise<Record> {
     timestamp: new Date(),
   });
 
-  await orm.em.persistAndFlush(newEntry);
+  await orm.em
+    .persistAndFlush(newEntry)
+    .then((_result) => {
+      return Promise.resolve(newEntry);
+    })
+    .catch((err) => {
+      console.error(err);
+      return Promise.reject(newEntry);
+    });
 
   return Promise.resolve(newEntry);
 }
@@ -27,7 +35,7 @@ async function fetchEntry(
   if (foundEntry && foundEntry.length >= 1) {
     return Promise.resolve(foundEntry[0]);
   }
-  return Promise.reject(new Error('not found'));
+  return Promise.resolve(null);
 }
 
 export async function checkAndCreateAccount(
