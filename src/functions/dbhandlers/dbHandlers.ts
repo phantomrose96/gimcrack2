@@ -83,13 +83,10 @@ export async function getBalance(record: Record): Promise<number> {
 
 export async function updateDailies(record: Record): Promise<number> {
   const nowTime = new Date();
-  const timestamp = record.timestamp.getTime();
-  const cutOff = new Date(2020, 10, 14, 21, 18, 0, 0);
 
   const diff = nowTime.getTime() - record.timestamp.getTime();
-  const olderThanCutOff = cutOff.getTime() - timestamp;
 
-  if (diff > MillInADay || olderThanCutOff) {
+  if (diff > MillInADay) {
     await updateTimeStamp(record, nowTime);
     return Promise.resolve(updateBalance(record, 50));
   } else {
