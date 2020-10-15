@@ -8,7 +8,7 @@ export async function createEntry(userid: string): Promise<Record> {
   const newEntry = orm.em.create(Record, {
     userID: userid,
     balance: 10,
-    timestamp: new Date(2015, 11, 5),
+    timestamp: new Date(2016, 11, 5),
   });
 
   await orm.em
@@ -83,8 +83,13 @@ export async function getBalance(record: Record): Promise<number> {
 
 export async function updateDailies(record: Record): Promise<number> {
   const nowTime = new Date();
+  const timestamp = record.timestamp.getTime();
+  const cutOff = new Date(2020, 10, 14, 21, 18, 0, 0);
+
   const diff = nowTime.getTime() - record.timestamp.getTime();
-  if (diff > MillInADay) {
+  const olderThanCutOff = cutOff.getTime() - timestamp;
+
+  if (diff > MillInADay || olderThanCutOff) {
     await updateTimeStamp(record, nowTime);
     return Promise.resolve(updateBalance(record, 50));
   } else {
