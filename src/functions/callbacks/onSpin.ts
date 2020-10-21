@@ -39,8 +39,9 @@ export async function onSpin(
 
   const spin = generateSpin();
   message.channel.send(makeMessage(spin));
-  const wins = numberOfWins(spin) * betMultiplier;
-  const netChange = wins - bet;
+  const wins = numberOfWins(spin);
+  const payout = wins * betMultiplier;
+  const netChange = payout - bet;
   const balance = await updateBalance(account, netChange);
 
   if (wins === 0) {
@@ -48,9 +49,13 @@ export async function onSpin(
     return;
   }
 
-  message.channel.send(
-    `${response} Heres your winnings: ${wins}x :sparkles:\n Current Balance: ${balance}x :sparkles:`,
-  );
+  let reply = `${response}`;
+  reply +=
+    betMultiplier !== 0
+      ? `Heres your payout: ${payout}x :sparkles:\n`
+      : `Of course, you didn't bet anything. No payout for you.\n`;
+  reply += `Current Balance: ${balance}x :sparkles:`;
+  message.channel.send(reply);
 }
 
 function makeMessage(spin: number[]): string {

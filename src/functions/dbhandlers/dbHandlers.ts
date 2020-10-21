@@ -83,7 +83,6 @@ export async function getBalance(record: Record): Promise<number> {
 
 export async function updateDailies(record: Record): Promise<number> {
   const nowTime = new Date();
-
   const diff = nowTime.getTime() - record.timestamp.getTime();
 
   if (diff > MillInADay) {

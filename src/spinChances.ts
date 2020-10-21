@@ -18,6 +18,6 @@ for (let i = 0; i < spins; i++) {
 console.log(outcomes);
 let payout = 0;
 outcomes.forEach((el, ind) => {
-  payout += (el / spins) * ind;
+  payout += (el / spins) * ind * 2;
 });
 console.log(payout);

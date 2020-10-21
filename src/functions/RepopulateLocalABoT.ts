@@ -5,6 +5,19 @@ import fs from 'fs';
 import { Chapter } from 'src/interfaces/Story';
 import path from 'path';
 
+function getNewChapterTemplate(
+  contents: string[],
+  hyperlink: string,
+): Chapter {
+  return {
+    content: contents,
+    hyperlink: hyperlink,
+    date: null,
+    authorNotes: '',
+    length: 0,
+    reviews: [],
+  };
+}
 export async function repopulateLocalABoT() {
   const URL: string = rootsite + '/';
   const response = await fetch(URL);
@@ -44,14 +57,10 @@ async function populateChapterContent(
 
   const chapterContents = processChapterContent($contents);
 
-  const newChapter: Chapter = {
-    content: chapterContents,
-    hyperlink: hyperlink,
-    date: null,
-    authorNotes: '',
-    length: 0,
-    reviews: [],
-  };
+  const newChapter: Chapter = getNewChapterTemplate(
+    chapterContents,
+    hyperlink,
+  );
 
   setTimeout(() => {}, 500); // dont want AO3 to ding me for spammy bot activity :<
 
@@ -109,5 +118,3 @@ function fetchChapterLinkFromChapter(
   }
   return rootsite + '/chapters/' + chapSuffix;
 }
-
-repopulateLocalABoT();
