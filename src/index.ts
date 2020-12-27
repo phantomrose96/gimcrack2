@@ -3,6 +3,9 @@ import { generateResponse } from './strings/Responses';
 import { functionMap } from './structs/Mappings';
 import { TOKEN } from './strings/Token'; // ignored from git repo
 import { initORM } from './database/Database';
+import { onDead } from './functions';
+
+const ISDEAD = false;
 
 const client = new Discord.Client();
 if (TOKEN) {
@@ -23,7 +26,12 @@ client.on('message', (message) => {
     entry.commands.forEach((command) => {
       if (message.content.startsWith(command)) {
         message.content = message.content.substr(command.length + 1);
-        entry.callback(message, generateResponse(entry.responses));
+        ISDEAD
+          ? onDead(message)
+          : entry.callback(
+              message,
+              generateResponse(entry.responses),
+            );
       }
     });
   });
