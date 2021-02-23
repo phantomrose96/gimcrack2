@@ -1,11 +1,15 @@
 import Discord from 'discord.js';
-import { generateResponse } from './strings/Responses';
 import { functionMap } from './structs/Mappings';
 import { TOKEN } from './strings/Token'; // ignored from git repo
 import { initORM } from './database/Database';
 import { onDead } from './functions';
+import { Actor } from './interfaces/Actor';
+import {
+  generateResponse,
+  getResponsesByActor,
+} from './functions/helpers/ResponsesHelpers';
 
-const ISDEAD = false;
+let ACTIVEACTOR = Actor.Gimcrack;
 
 const client = new Discord.Client();
 if (TOKEN) {
@@ -22,11 +26,11 @@ client.on('ready', () => {
 });
 
 client.on('message', (message) => {
-  functionMap.forEach((entry) => {
+  functionMap(getResponsesByActor(ACTIVEACTOR)).forEach((entry) => {
     entry.commands.forEach((command) => {
       if (message.content.startsWith(command)) {
         message.content = message.content.substr(command.length + 1);
-        ISDEAD
+        ACTIVEACTOR === Actor.None
           ? onDead(message)
           : entry.callback(
               message,

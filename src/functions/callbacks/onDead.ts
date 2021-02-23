@@ -1,16 +1,18 @@
 import Discord from 'discord.js';
 
 export async function onDead(message: Discord.Message) {
-  //   const newMessage = await message.channel.send('_ _');
-  //   await timeout(1200);
   const newMessage = await message.channel.send(
-    '.                                                                               _ _',
+    '                                                                              _ _',
   );
-  await timeout(1200);
+  await timeout(1000);
+  newMessage.edit(
+    '.                                                                              _ _',
+  );
+  await timeout(1000);
   newMessage.edit(
     '..                                                                              _ _',
   );
-  await timeout(1200);
+  await timeout(1000);
   newMessage.edit(
     '...                                                                             _ _',
   );
