@@ -84,3 +84,5 @@ export const NoneResponses: IResponses = {
   onFetchChapterResponses: [],
   onHelpResponses: [],
 };
+
+export const DeadStrings: string[] = ['...'];

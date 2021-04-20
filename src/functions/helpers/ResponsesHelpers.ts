@@ -24,7 +24,9 @@ export function getResponsesByActor(activeActor: Actor): IResponses {
     case Actor.Makeshift:
       return MakeResponses;
     case Actor.None:
-    default:
       return NoneResponses;
+
+    default:
+      throw new Error('unreachable case');
   }
 }

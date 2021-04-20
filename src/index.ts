@@ -8,8 +8,9 @@ import {
   generateResponse,
   getResponsesByActor,
 } from './functions/helpers/ResponsesHelpers';
+import { DeadStrings } from './strings/Responses';
 
-let ACTIVEACTOR = Actor.Gimcrack;
+let ACTIVEACTOR = Actor.None;
 
 const client = new Discord.Client();
 if (TOKEN) {
@@ -31,7 +32,7 @@ client.on('message', (message) => {
       if (message.content.startsWith(command)) {
         message.content = message.content.substr(command.length + 1);
         ACTIVEACTOR === Actor.None
-          ? onDead(message)
+          ? onDead(message, generateResponse(DeadStrings))
           : entry.callback(
               message,
               generateResponse(entry.responses),

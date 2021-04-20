@@ -10,12 +10,18 @@ export let GLOBALORM: ORM | undefined;
 
 export async function initORM(): Promise<ORM> {
   GLOBALORM = await MikroORM.init(microConfig);
+  if (GLOBALORM === undefined) {
+    throw new Error('GLOBALORM undefined');
+  }
   const migrator = await GLOBALORM.getMigrator();
 
   return new Promise((resolve, reject) => {
     migrator
       .up()
       .then(() => {
+        if (GLOBALORM === undefined) {
+          throw new Error('GLOBALORM undefined');
+        }
         resolve(GLOBALORM);
       })
       .catch((err) => {
