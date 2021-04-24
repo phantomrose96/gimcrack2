@@ -47,7 +47,7 @@ async function onManageRole(
     .then(() => message.channel.send(response + message.content))
     .catch((_err: Error) =>
       message.channel.send(
-        'Sorry! That role is a little too hot for me to touch',
+        'Ain\'t got enough permissions for that,
       ),
     );
 }

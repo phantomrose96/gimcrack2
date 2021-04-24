@@ -15,7 +15,7 @@ export async function onDailies(
   const dailiesResponse = await updateDailies(account);
   if (dailiesResponse < 0) {
     message.channel.send(
-      `Sorry, you're on cooldown for another ${Math.floor(
+      `Nuh-uh-uh, you're on cooldown for another ${Math.floor(
         -dailiesResponse,
       )} hours`,
     );

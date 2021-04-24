@@ -7,17 +7,13 @@ export function onFetchChapter(
 ) {
   const chaptNum = message.content.match(/\d+/);
   if (!chaptNum) {
-    message.channel.send(
-      "Sorry, didn't catch a chapter number in that request",
-    );
+    message.channel.send('What chapter?');
     return;
   }
   const chapterNumber = (chaptNum[0] as unknown) as number;
 
   if (chapterNumber > ABoT.length) {
-    message.channel.send(
-      'Hey what do I look like, a fortune teller?',
-    );
+    message.channel.send("I can't tell the future");
     return;
   }
 
