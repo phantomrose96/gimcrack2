@@ -66,7 +66,7 @@ export const SlipResponses: IResponses = {
     "Yep, 100%. I'm certain of it",
     'Absolutely, I feel it in my not-bones',
     "It could happen, but it sure ain't likely",
-    'Never ever ever huehuehuehue',
+    'Never ever ever gonna happen huehuehuehue',
   ],
   onFetchQuoteResponses: [
     'I found this one easy',
