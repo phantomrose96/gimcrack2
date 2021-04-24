@@ -26,13 +26,13 @@ export async function onSpin(
   const currentBalance = await getBalance(account);
   if (currentBalance < bet) {
     message.channel.send(
-      `Woah there! That's way too steep a bet. You can't gamble away more than your life force.`,
+      `Huehue that'd kill you if you bet that much.`,
     );
     return;
   }
 
   message.channel.send(
-    `Thanks, I'll be taking that: -${bet} :sparkles: \nCurrent balance: x${
+    `Thanks, yoink! -${bet} :sparkles: \nCurrent balance: x${
       currentBalance - bet
     } :sparkles:\n`,
   );
@@ -45,15 +45,15 @@ export async function onSpin(
   const balance = await updateBalance(account, netChange);
 
   if (wins === 0) {
-    message.channel.send('Nothing! Sorry dude, tough break.');
+    message.channel.send("Oof that's a tough break.");
     return;
   }
 
   let reply = `${response}`;
   reply +=
     betMultiplier !== 0
-      ? `Heres your payout: ${payout}x :sparkles:\n`
-      : `Of course, you didn't bet anything. No payout for you.\n`;
+      ? `Payout!!: ${payout}x :sparkles:\n`
+      : `You didn't bet nothing. No payout for you.\n`;
   reply += `Current Balance: ${balance}x :sparkles:`;
   message.channel.send(reply);
 }
