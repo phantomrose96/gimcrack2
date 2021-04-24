@@ -50,6 +50,54 @@ export const GimResponses: IResponses = {
 };
 
 export const SlipResponses: IResponses = {
+  onAskResponses: [
+    "I know the answer, but I'm not gonna tell you",
+    'Maybe maybe maybe~',
+    'Yeah, absolutely',
+    'Huehuehuehue',
+    "If I answer ya, I'll probably end up like Gim",
+    "Nah that's never gonna happen",
+    'Huehuehue, what do you think?',
+    "Chrissy told me, but I ain't telling you",
+    "How's about you tell ME something I wanna know first?",
+    'Not in a million years',
+    'I wonder :musical_note:',
+    "Oh I'm _betting_ on it",
+    "Yep, 100%. I'm certain of it",
+    'Absolutely, I feel it in my not-bones',
+    "It could happen, but it sure ain't likely",
+    'Never ever ever huehuehuehue',
+  ],
+  onFetchQuoteResponses: [
+    'I found this one easy',
+    'Gimme something harder next time, huehue',
+    "'Course I know where that quote is",
+    'I got these memorized',
+  ],
+  onBalanceResponses: [
+    "Here's your balance. Mind giving me a taste?",
+    "I'd die again to have this kinda energy",
+    'Damn that looks tasty huehuehue',
+  ],
+  onDailiesResponses: ['Grabbed these right off Ritsu. Yoink!'],
+  onSpinResponses: [
+    'Spin spin',
+    'Huehuehue we got a winner!',
+    'Look at that',
+  ],
+  onAssignRoleResponses: [
+    'There you go',
+    'That role looks good on ya huehue',
+  ],
+  onRemoveRoleResponses: [
+    'Alrighty. No more role for you',
+    'Byebye role',
+  ],
+  onFetchChapterResponses: ["I hope I'm in this chapter huehuehue"],
+  onHelpResponses: ["This the information you're looking for?"],
+};
+
+export const NoneResponses: IResponses = {
   onAskResponses: [],
   onFetchQuoteResponses: [],
   onBalanceResponses: [],
@@ -73,16 +121,10 @@ export const MakeResponses: IResponses = {
   onHelpResponses: [],
 };
 
-export const NoneResponses: IResponses = {
-  onAskResponses: [],
-  onFetchQuoteResponses: [],
-  onBalanceResponses: [],
-  onDailiesResponses: [],
-  onSpinResponses: [],
-  onAssignRoleResponses: [],
-  onRemoveRoleResponses: [],
-  onFetchChapterResponses: [],
-  onHelpResponses: [],
-};
-
 export const DeadStrings: string[] = ['...'];
+export const MournStrings: string[] = [
+  'I miss Gim...',
+  "It's lonely without Gim...",
+  'Huehue, just remembered something funny Gimcrack used to do... Ah.....',
+  'I miss Gim... Sorry, whatdya say?',
+];

@@ -7,3 +7,4 @@ export * from './onSpin';
 export * from './onBalance';
 export * from './onDailies';
 export * from './onHelp';
+export * from './onMourn';
