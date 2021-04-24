@@ -81,13 +81,13 @@ export const SlipResponses: IResponses = {
   ],
   onDailiesResponses: ['Grabbed these right off Ritsu. Yoink!'],
   onSpinResponses: [
-    'Spin spin',
-    'Huehuehue we got a winner!',
-    'Look at that',
+    'Spin spin: ',
+    'Huehuehue we got a winner! ',
+    'Look at that: ',
   ],
   onAssignRoleResponses: [
-    'There you go',
-    'That role looks good on ya huehue',
+    'There you go: ',
+    'That role looks good on ya huehue: ',
   ],
   onRemoveRoleResponses: [
     'Alrighty. No more role for you',
