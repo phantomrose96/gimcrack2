@@ -32,7 +32,7 @@ export async function onSpin(
   }
 
   message.channel.send(
-    `Thanks, yoink! -${bet} :sparkles: \nCurrent balance: x${
+    `Thanks, huehuehue -${bet} :sparkles: \nCurrent balance: x${
       currentBalance - bet
     } :sparkles:\n`,
   );
@@ -52,7 +52,7 @@ export async function onSpin(
   let reply = `${response}`;
   reply +=
     betMultiplier !== 0
-      ? `Payout!!: ${payout}x :sparkles:\n`
+      ? `Payout! ${payout}x :sparkles:\n`
       : `You didn't bet nothing. No payout for you.\n`;
   reply += `Current Balance: ${balance}x :sparkles:`;
   message.channel.send(reply);
