@@ -21,7 +21,7 @@ export function onFetchQuote(
   if (!!foundQuote) {
     message.channel.send(response + '```' + foundQuote + '```');
   } else {
-    message.channel.send("That quote don't exist. I looked.");
+    message.channel.send('No quote for that. Try again!');
   }
 }
 

@@ -59,7 +59,6 @@ export async function updateBalance(
 ): Promise<number> {
   const orm = await getORM();
   record.balance += delta;
-
   await orm.em.persistAndFlush(record);
 
   return Promise.resolve(getBalance(record));

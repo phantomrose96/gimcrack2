@@ -53,7 +53,7 @@ export async function onSpin(
   reply +=
     betMultiplier !== 0
       ? `Payout! ${payout}x :sparkles:\n`
-      : `You didn't bet nothing. No payout for you.\n`;
+      : `No bet, no payout huehuehue.\n`;
   reply += `Current Balance: ${balance}x :sparkles:`;
   message.channel.send(reply);
 }

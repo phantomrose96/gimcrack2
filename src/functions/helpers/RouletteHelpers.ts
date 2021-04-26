@@ -4,7 +4,6 @@ export function numberOfWins(arr: number[]): number {
   if (arr.length != 9) {
     return -1;
   }
-
   return rowWins(arr) + colWins(arr) + diagWins(arr);
 }
 
