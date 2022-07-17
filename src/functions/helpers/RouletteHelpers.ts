@@ -2,7 +2,7 @@ import { WheelIcons } from '../../strings/WheelIcons';
 
 export function numberOfWins(arr: number[]): number {
   if (arr.length != 9) {
-    return -1;
+    throw new Error('Array for roulette spin is wrong dimension');
   }
   return rowWins(arr) + colWins(arr) + diagWins(arr);
 }
