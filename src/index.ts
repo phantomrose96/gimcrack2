@@ -4,13 +4,10 @@ import { TOKEN } from './strings/Token'; // ignored from git repo
 import { initORM } from './database/Database';
 import { onDead, onMourn } from './functions';
 import { Actor } from './interfaces/Actor';
-import {
-  generateResponse,
-  getResponsesByActor,
-} from './functions/helpers/ResponsesHelpers';
+import { generateResponse, getResponsesByActor } from './functions/helpers/ResponsesHelpers';
 import { DeadStrings, MournStrings } from './strings/Responses';
 
-let ACTIVEACTOR = Actor.Slipshod;
+let ACTIVEACTOR = Actor.None;
 
 const client = new Discord.Client();
 if (TOKEN) {
@@ -36,10 +33,7 @@ client.on('message', (message) => {
           ? onDead(message, generateResponse(DeadStrings))
           : ACTIVEACTOR === Actor.Slipshod && rand < 0.08
           ? onMourn(message, generateResponse(MournStrings))
-          : entry.callback(
-              message,
-              generateResponse(entry.responses),
-            );
+          : entry.callback(message, generateResponse(entry.responses));
       }
     });
   });
