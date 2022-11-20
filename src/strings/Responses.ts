@@ -24,11 +24,7 @@ export const GimResponses: IResponses = {
     'Finding this one was tricky! Maybe tip a little more next time?',
     'Abra cadabra',
   ],
-  onBalanceResponses: [
-    'Cha-ching!',
-    'Here',
-    'Ritsu would be jealous',
-  ],
+  onBalanceResponses: ['Cha-ching!', 'Here', 'Ritsu would be jealous'],
   onDailiesResponses: ["Skimmed these off Ritsu. Don't tell him."],
   onSpinResponses: [
     'Well would you look at that? ',
@@ -89,12 +85,69 @@ export const SlipResponses: IResponses = {
     'There you go: ',
     'That role looks good on ya huehue: ',
   ],
-  onRemoveRoleResponses: [
-    'Alrighty. No more role for you',
-    'Byebye role',
-  ],
+  onRemoveRoleResponses: ['Alrighty. No more role for you', 'Byebye role'],
   onFetchChapterResponses: ["I hope I'm in this chapter huehuehue"],
   onHelpResponses: ["This the information you're looking for?"],
+};
+
+export type MakeResponses =
+  | 'No. That was never possible.'
+  | 'Yes. It was always possible.'
+  | 'Never.'
+  | 'Definitely.'
+  | 'In time. All things, in time.'
+  | "I won't tell you. You don't deserve to know."
+  | "I won't tell you. You think you deserve to know?"
+  | "Don't bother me with petulent questions like that."
+  | 'Yes. Was it not obvious?'
+  | 'No. Was that not obvious?'
+  | "I'll tell you, but at a great price."
+  | "I'll never tell you, not for anything"
+  | 'Of course. Now be quiet.'
+  | 'No, never. Now be quiet.';
+
+export const MakeAlters: Record<MakeResponses, MakeResponses> = {
+  ['No. That was never possible.']: 'Yes. It was always possible.',
+  ['Yes. It was always possible.']: 'No. That was never possible.',
+  ['In time. All things, in time.']: 'In time. All things, in time.',
+  ['Never.']: 'Definitely.',
+  ['Definitely.']: 'Never.',
+  ["I won't tell you. You don't deserve to know."]:
+    "I won't tell you. You think you deserve to know?",
+  ["I won't tell you. You think you deserve to know?"]:
+    "I won't tell you. You don't deserve to know.",
+  ["Don't bother me with petulent questions like that."]:
+    "Don't bother me with petulent questions like that.",
+  ['Yes. Was it not obvious?']: 'No. Was that not obvious?',
+  ['No. Was that not obvious?']: 'Yes. Was it not obvious?',
+  ["I'll tell you, but at a great price."]:
+    "I'll never tell you, not for anything",
+  ["I'll never tell you, not for anything"]:
+    "I'll tell you, but at a great price.",
+  ['Of course. Now be quiet.']: 'No, never. Now be quiet.',
+  ['No, never. Now be quiet.']: 'Of course. Now be quiet.',
+};
+
+export const MakeResponses: IResponses = {
+  onAskResponses: Object.keys(MakeAlters),
+  onFetchQuoteResponses: [
+    'This was a meaningless task.',
+    "You'll pay in due time for this request. Trust me.",
+    'Meaningless drivel. Obnoxious story.',
+    "I'm biding my time. You'll see soon enough.",
+    'There is nothing to learn from this. There is no saving these people.',
+  ],
+  onBalanceResponses: [
+    'Here is what remains of your lifeforce. Best to use it carefully.',
+  ],
+  onDailiesResponses: [
+    "Here. Shorn from Ritsu's lifeforce. What little of it he has left.",
+  ],
+  onSpinResponses: ['Dumb luck. Little else.', '...', 'Loathesome.'],
+  onAssignRoleResponses: ['Here is your role. Guard it.'],
+  onRemoveRoleResponses: ["I've taken that role from you."],
+  onFetchChapterResponses: ['Do with this what you will.', 'Pointless'],
+  onHelpResponses: ['Here is your information.'],
 };
 
 export const NoneResponses: IResponses = {
@@ -109,19 +162,13 @@ export const NoneResponses: IResponses = {
   onHelpResponses: [],
 };
 
-export const MakeResponses: IResponses = {
-  onAskResponses: [],
-  onFetchQuoteResponses: [],
-  onBalanceResponses: [],
-  onDailiesResponses: [],
-  onSpinResponses: [],
-  onAssignRoleResponses: [],
-  onRemoveRoleResponses: [],
-  onFetchChapterResponses: [],
-  onHelpResponses: [],
-};
+export const DeadStrings: string[] = [
+  '`...`',
+  '`*A cold wind blows...*`',
+  '`*You feel a chill on your shoulder. Like something is there...*`',
+  '`...What was that...?`',
+];
 
-export const DeadStrings: string[] = ['...'];
 export const MournStrings: string[] = [
   'I miss Gim...',
   "It's lonely without Gim...",

@@ -5,15 +5,9 @@ import {
   getBalance,
   updateBalance,
 } from '../dbhandlers/dbHandlers';
-import {
-  generateSpin,
-  numberOfWins,
-} from '../helpers/RouletteHelpers';
+import { generateSpin, numberOfWins } from '../helpers/RouletteHelpers';
 
-export async function onSpin(
-  message: Discord.Message,
-  response: string,
-) {
+export async function onSpin(message: Discord.Message, response: string) {
   const findBet = message.content.match(/\d+/);
   const bet = findBet ? ((findBet[0] as unknown) as number) : 1;
   const betMultiplier = bet * 2;
@@ -25,14 +19,12 @@ export async function onSpin(
 
   const currentBalance = await getBalance(account);
   if (currentBalance < bet) {
-    message.channel.send(
-      `Huehue that'd kill you if you bet that much.`,
-    );
+    message.channel.send(`You would die quickly if you bet that much.`);
     return;
   }
 
   message.channel.send(
-    `Thanks, huehuehue -${bet} :sparkles: \nCurrent balance: x${
+    `That's mine now -${bet} :sparkles: \nCurrent balance: x${
       currentBalance - bet
     } :sparkles:\n`,
   );
@@ -45,15 +37,15 @@ export async function onSpin(
   const balance = await updateBalance(account, netChange);
 
   if (wins === 0) {
-    message.channel.send("Oof that's a tough break.");
+    message.channel.send('You lose.');
     return;
   }
 
   let reply = `${response}`;
   reply +=
     betMultiplier !== 0
-      ? `Payout! ${payout}x :sparkles:\n`
-      : `No bet, no payout huehuehue.\n`;
+      ? `A lucky spin... ${payout}x :sparkles:\n`
+      : `You get nothing if you do not bet, first.\n`;
   reply += `Current Balance: ${balance}x :sparkles:`;
   message.channel.send(reply);
 }

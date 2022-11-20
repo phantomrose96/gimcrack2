@@ -30,3 +30,16 @@ export function getResponsesByActor(activeActor: Actor): IResponses {
       throw new Error('unreachable case');
   }
 }
+
+export function actorResponseRange(actor: Actor, timestamp: number): boolean {
+  const modul0 = timestamp % 100;
+
+  switch (actor) {
+    case Actor.Gimcrack:
+      return modul0 <= 5;
+    case Actor.Slipshod:
+      return modul0 <= 10 && modul0 > 5;
+    default:
+      return modul0 > 10;
+  }
+}

@@ -1,13 +1,7 @@
 import Discord from 'discord.js';
-import {
-  checkAndCreateAccount,
-  updateDailies,
-} from '../dbhandlers/dbHandlers';
+import { checkAndCreateAccount, updateDailies } from '../dbhandlers/dbHandlers';
 
-export async function onDailies(
-  message: Discord.Message,
-  response: string,
-) {
+export async function onDailies(message: Discord.Message, response: string) {
   const account = await checkAndCreateAccount(message.author.id);
   if (!account) {
     return;
@@ -15,16 +9,13 @@ export async function onDailies(
   const dailiesResponse = await updateDailies(account);
   if (dailiesResponse < 0) {
     message.channel.send(
-      `Nuh-uh-uh, you're on cooldown for another ${Math.floor(
+      `Greedy. You're on cooldown for another ${Math.floor(
         -dailiesResponse,
       )} hours`,
     );
   } else {
     message.channel.send(
-      response +
-        ': x50\nCurrent Balance: ' +
-        dailiesResponse +
-        ' :sparkles:',
+      response + ': x50\nCurrent Balance: ' + dailiesResponse + ' :sparkles:',
     );
   }
 }
