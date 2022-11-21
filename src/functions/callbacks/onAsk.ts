@@ -5,7 +5,7 @@ export async function onAsk(message: Discord.Message, response: string) {
   const newMessage = await message.channel.send(response);
 
   const altResponse = MakeAlters[response as MakeResponses];
-  if (!altResponse) {
+  if (!altResponse || Math.random() > 0.4) {
     return;
   }
 
