@@ -36,9 +36,9 @@ export function actorResponseRange(actor: Actor, timestamp: number): boolean {
 
   switch (actor) {
     case Actor.Gimcrack:
-      return modul0 <= 5;
+      return modul0 <= 10;
     case Actor.Slipshod:
-      return modul0 <= 10 && modul0 > 5;
+      return modul0 <= 20 && modul0 > 10;
     default:
       return modul0 > 10;
   }
