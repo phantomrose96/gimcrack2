@@ -44,7 +44,7 @@ export async function onSpin(message: Discord.Message, response: string) {
   let reply = `${response}`;
   reply +=
     betMultiplier !== 0
-      ? `A lucky spin... ${payout}x :sparkles:\n`
+      ? `... ${payout}x :sparkles:\n`
       : `You get nothing if you do not bet, first.\n`;
   reply += `Current Balance: ${balance}x :sparkles:`;
   message.channel.send(reply);

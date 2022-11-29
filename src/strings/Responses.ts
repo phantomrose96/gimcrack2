@@ -141,9 +141,9 @@ export const MakeResponses: IResponses = {
     'Here is what remains of your lifeforce. Best to use it carefully.',
   ],
   onDailiesResponses: [
-    "Here. Shorn from Ritsu's lifeforce. What little of it he has left.",
+    "Here. Shorn from Ritsu's lifeforce. What little of it he has left",
   ],
-  onSpinResponses: ['Dumb luck. Little else.', '...', 'Loathesome.'],
+  onSpinResponses: ['Dumb luck. Little else.', '...A lucky spin', 'Loathsome.'],
   onAssignRoleResponses: ['Here is your role. Guard it.'],
   onRemoveRoleResponses: ["I've taken that role from you."],
   onFetchChapterResponses: ['Do with this what you will.', 'Pointless'],
