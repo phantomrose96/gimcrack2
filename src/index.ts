@@ -2,7 +2,7 @@ import Discord from 'discord.js';
 import { functionMap } from './structs/Mappings';
 import { ActorToken, TOKENS } from './strings/Token'; // ignored from git repo
 import { initORM } from './database/Database';
-import { onMourn } from './functions';
+import { onDead, onMourn } from './functions';
 import { Actor } from './interfaces/Actor';
 import {
   actorResponseRange,
@@ -45,7 +45,7 @@ function login(val: ActorToken) {
           message.content = message.content.substr(command.length + 1);
           ACTIVEACTOR !== Actor.Makeshift
             ? onMourn(message, generateResponse(DeadStrings))
-            : entry.callback(message, generateResponse(entry.responses));
+            : onDead(message, '...');
         }
       });
     });
